@@ -1,0 +1,60 @@
+.maindiv{
+    width:80%;
+    height:80%;
+    margin:auto;
+    padding: auto;
+    justify-self: center;
+    align-self: center;
+    background-color:#FFF;
+}
+.header{
+    text-align: center;
+}
+.btn_group{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 32px auto !important;
+    padding: 32px auto !important;
+}
+
+.custom_datalist{
+    background-color: #FFF;
+}
+
+
+.space-div{
+    width: 32px;
+}
+
+.invalid{
+    color: red;
+    display: none;
+}
+
+
+/* 
+.modal p { margin: 1em 0; }
+    
+.edit_form.modal {
+    border-radius: 0;
+    line-height: 18px;
+    padding: auto;
+    font-family: "Lucida Grande", Verdana, sans-serif;
+} 
+
+.edit_form.modal p { padding: 20px 30px; border-bottom: 1px solid #ddd; margin: 0;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #eee),color-stop(1, #fff));
+    overflow: hidden;
+}
+.edit_form.modal p:last-child { border: none; }
+.edit_form.modal p label { float: left; font-weight: bold; color: #333; font-size: 13px; width: 110px; line-height: 22px; }
+.edit_form.modal p input[type="text"],
+.edit_form.modal p input[type="submit"]		{
+    font: normal 12px/18px "Lucida Grande", Verdana;
+    padding: 3px;
+    border: 1px solid #ddd;
+    width: 200px;
+} */
+

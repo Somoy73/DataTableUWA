@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Somoy"/>
+    <meta name="description" content="R&D- Test Data Table"/>
+    <title>DataTableUx</title>
+    
+    <!-- <link rel="stylesheet" type="text/css" href="//uwa.netvibes.com/lib/c/UWA/assets/css/standalone.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" href="assets/css/standalone.css" />
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/home.css" />
+
+    <!-- <script type="text/javascript" src="./assets/js/ven/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="./assets/js/ven/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="./assets/js/ven/jquery.dataTables.js"></script> -->
+    <script data-main="assets/js/config.js" src="assets/js/ven/require.js"></script>
+    <script type="text/javascript" src="assets/js/datatableUx.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/ven/UWA_Standalone_Alone.js"></script> -->
+    <script>
+        require(['config'], function(){
+            require(['VALMET/DataTableUx', 'uwa', 'jquery', 'bootstrap', 'datatables'], function (DemoWidget){
+                widget.addEvents({
+                    onLoad: DemoWidget.onLoad,
+                    onRefresh: DemoWidget.onRefresh,
+                });
+            });
+        })
+    </script>
+    <!-- Application JavaScript Source -->
+    <!-- <script type="text/javascript">
+        //<![CDATA[
+            var DemoWidget = {
+                onLoad: function() {
+                    DemoWidget.init();
+                },
+
+                onRefresh: function() {
+
+                    DemoWidget.init();
+                },
+
+                init: function() {
+                    DemoWidget.getWidgetBase();
+                    DemoWidget.dataTableInit();
+                },
+                getWidgetBase: function() {
+                    var widgetContentContainer = {
+                        tag: "div",
+                        class: "maindiv",
+                        html: [
+                            {
+                                tag: "div",
+                                class: "header",
+                                html: [
+                                    {
+                                        tag: "h1",
+                                        class: "title",
+                                        html: "DataTableUx"
+                                    }
+                                ]
+                            },
+                            {
+                                tag: "table",
+                                id: "company_table",
+                                class: "table table-striped table-hover table-responsive",
+                                html: [
+                                    {
+                                        tag: "thead",
+                                        html: [
+                                            {
+                                                tag: "tr",
+                                                html: [
+                                                    {
+                                                        tag: "th",
+                                                        html: "ID"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Company Name"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Website"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Email"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Yearly Revenue"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Business Type"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "District"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Thana"
+                                                    },
+                                                    {
+                                                        tag: "th",
+                                                        html: "Actions"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+                    widget.setBody([widgetContentContainer]);
+                    widget.body.setStyle("overflow", "auto");
+                },
+                dataTableInit: function (){
+                    jQuery.noConflict();
+                    jQuery(document).ready(function () {
+                        jQuery.ajax({
+                        url: './company.txt',
+                        // type: 'GET',
+                        // headers: {
+                        //     Accept: 'application/json',
+                        //     'Content-Type': 'application/json',
+                        // },
+                        success: function (data) {
+                            
+                            jQuery('#company_table').DataTable({
+                                stateSave: true,
+                                stateDuration: -1,
+                                stateSaveCallback: function (settings, data) {
+                                    console.log('Saved state: ' + JSON.stringify(data));
+                                    sessionStorage.setItem(
+                                    'DataTables_' + settings.sInstance,
+                                    JSON.stringify(data)
+                                    );
+                                },
+                                stateLoadCallback: function (settings) {
+                                    return JSON.parse(
+                                    sessionStorage.getItem(
+                                        'DataTables_' + settings.sInstance
+                                    )
+                                    );
+                                },
+                                ajax: './company.txt',
+                                columnDefs: [
+                                    {
+                                    defaultContent: '-',
+                                    targets: '_all',
+                                    },
+                                    {
+                                    targets: [0],
+                                    visible: true,
+                                    searchable: false,
+                                    },
+                                ],
+                                columns: [
+                                    { data: 'id' },
+                                    { data: 'name' },
+                                    { data: 'website' },
+                                    {
+                                    data: 'email',
+                                    },
+                                    {
+                                    data: 'revenue',
+                                    className: 'dt-right',
+                                    render: function (data, type) {
+                                        let number = jQuery.fn.dataTable.render
+                                        .number(',', '.', 0, '$')
+                                        .display(data);
+
+                                        if (type === 'display') {
+                                        let color = 'green';
+                                        if (data <= 250000) {
+                                            color = '#FF6961';
+                                        } else if (data <= 1000000) {
+                                            color = 'orange';
+                                        } else if (data <= 5000000) {
+                                            color = '#70AD73';
+                                        }
+
+                                        return (
+                                            '<span style="color:' +
+                                            color +
+                                            '">' +
+                                            number +
+                                            '</span>'
+                                        );
+                                        }
+
+                                        return number;
+                                    },
+                                    },
+                                    {
+                                    data: 'type',
+                                    className: 'dt-center cell-type',
+                                    render: function (data, type, row) {
+                                        if (type == 'display') {
+                                        let str = data.toString();
+                                        return `<span data-toggle="tooltip" data-placement="top" title="${str}">
+                                                                ${
+                                                                str.length < 15
+                                                                    ? str
+                                                                    : str.substr(0, 15 - 1) +
+                                                                    '&#8230;'
+                                                                }
+                                                                </span>`;
+                                        }
+                                        return data;
+                                    },
+                                    },
+                                    {
+                                    data: 'district',
+                                    },
+                                    {
+                                    data: 'thana',
+                                    },
+                                    {
+                                    data: null,
+                                    className: 'dt-center',
+                                    defaultContent: `<div class="btn-grp">
+                                                        <button type="button" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="bottom" title="Edit this row" id="edit_button">Edit</button>
+                                                        <button type="button" class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom" title="Delete this row" style={padding-left: '16px'} id="delete_button">Delete</button>
+                                                        </div>`,
+                                    },
+                            ],
+                            });
+                        },
+                        error: function (err) {
+                            console.log(err);
+                            jQuery('#company_table').DataTable({});
+                        },
+                        });
+                    });
+                },
+            };
+            widget.addEvents({
+                onLoad: DemoWidget.onLoad,
+                onRefresh: DemoWidget.onRefresh,
+            });
+
+        //]]>
+        </script> -->
+</head>
+<body>
+    <p>Loading...</p>
+</body>
+</html>
